@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { getRandomFact } from './services/facts.js'
-
-// const CAT_ENDPOINT_IMAGE_URL = 'https://cataas.com/cat/says/' [DEJÓ DE FUNCIONAR (BAD GATEWAY)]
+import { useCatImage } from './hooks/useCatImage'
 
 export default function App () {
   const [fact, setFact] = useState()
-  // const [imageUrl, setImageUrl] = useState()
+
+  // Para recuperar la imagen cada vez que enviamos una cita [DEJÓ DE FUNCIONAR (BAD GATEWAY)]
+  const { imageUrl } = useCatImage({ fact })
 
   // Para recuperar la cita al cargar la página
   useEffect(() => {
@@ -15,17 +16,6 @@ export default function App () {
     getRandomFact().then(setFact)
   }, [])
 
-  // Para recuperar la imagen cada vez que tenemos una cita nueva [DEJÓ DE FUNCIONAR (BAD GATEWAY)]
-  /*
-  useEffect(() => {
-    if (!fact) return
-    const firstWord = fact.split(' ')[0]
-    fetch(CAT_ENDPOINT_IMAGE_URL + firstWord)
-      .then(res => {
-        setImageUrl(res.url)
-      })
-  }, [fact])
-  */
   const handleClick = () => {
     getRandomFact().then(setFact)
   }
@@ -35,9 +25,7 @@ export default function App () {
       <h1>App de gatitos</h1>
       <section>
         {fact && <p>{fact}</p>}
-        {/*
-          {imageUrl && <img src={imageUrl} alt={`Cat image extracted using the first word for ${fact}`} />}
-        */}
+        {imageUrl && <img src={imageUrl} alt={`Cat image extracted using the first word for ${fact}`} />}
         <button onClick={handleClick}>Get new fact</button>
       </section>
     </main>
