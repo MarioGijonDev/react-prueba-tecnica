@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react'
 
 const CAT_ENDPOINT_IMAGE_URL = 'https://cataas.com/cat/says/' // [DEJÓ DE FUNCIONAR (BAD GATEWAY)]
-
 // Para recuperar la imagen cada vez que enviamos una cita [DEJÓ DE FUNCIONAR (BAD GATEWAY)]
+
 export function useCatImage ({ fact }) {
   const [imageUrl, setImageUrl] = useState()
 
